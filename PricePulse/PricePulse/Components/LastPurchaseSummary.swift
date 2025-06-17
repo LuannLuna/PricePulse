@@ -12,35 +12,35 @@ struct LastPurchaseSummary: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Last Purchase Summary")
+            Text(Strings.purchaseLastSummary)
                 .font(.headline)
 
             Grid(alignment: .leading, horizontalSpacing: 20, verticalSpacing: 8) {
                 GridRow {
-                    Text("Store:")
+                    Text(Strings.purchaseStore)
                     Text(purchase.store)
                 }
                 GridRow {
-                    Text("Date:")
+                    Text(Strings.purchaseDate)
                     Text(purchase.date, style: .date)
                 }
                 GridRow {
-                    Text("Unit Price:")
-                    Text("R$\(purchase.unitPrice, specifier: "%.2f")")
+                    Text(Strings.purchaseUnitPrice)
+                    Text(String(format: "currency.format".localized, purchase.unitPrice))
                         .font(.title3)
                         .bold()
                 }
                 GridRow {
-                    Text("Quantity:")
-                    Text("\(purchase.quantity, specifier: "%.1f") \(purchase.unit)")
+                    Text(Strings.purchaseQuantity)
+                    Text(String(format: "quantity.format".localized, purchase.quantity, purchase.unit))
                 }
                 GridRow {
-                    Text("Total Price:")
-                    Text("R$\(purchase.totalPrice, specifier: "%.2f")")
+                    Text(Strings.purchaseTotalPrice)
+                    Text(String(format: "currency.format".localized, purchase.totalPrice))
                 }
                 GridRow {
-                    Text("Tax:")
-                    Text("R$\(purchase.tax, specifier: "%.2f")")
+                    Text(Strings.purchaseTax)
+                    Text(String(format: "currency.format".localized, purchase.tax))
                 }
             }
             .frame(maxWidth: .infinity)

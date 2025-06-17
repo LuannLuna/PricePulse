@@ -12,7 +12,7 @@ struct PurchaseHistoryTable: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Purchase History")
+            Text(Strings.purchaseHistory)
                 .font(.headline)
 
             ForEach(purchases) { purchase in
@@ -31,12 +31,12 @@ struct PurchaseHistoryTable: View {
                     }
 
                     HStack {
-                        Text("R$\(purchase.unitPrice, specifier: "%.2f")")
+                        Text(String(format: "currency.format".localized, purchase.unitPrice))
                             .font(.headline)
 
                         Spacer()
 
-                        Text("\(purchase.quantity, specifier: "%.1f") \(purchase.unit)")
+                        Text(String(format: "quantity.format".localized, purchase.quantity, purchase.unit))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
@@ -51,7 +51,7 @@ struct PurchaseHistoryTable: View {
         .cornerRadius(10)
         .shadow(radius: 2)
     }
-} 
+}
 
 #Preview {
     PurchaseHistoryTable(

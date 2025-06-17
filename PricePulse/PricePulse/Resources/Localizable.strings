@@ -1,0 +1,29 @@
+// App
+"app.title" = "Price Pulse";
+
+// Search
+"search.prompt" = "Produto";
+
+// Purchase Details
+"purchase.last.summary" = "Last Purchase Summary";
+"purchase.store" = "Store:";
+"purchase.date" = "Date:";
+"purchase.unit.price" = "Unit Price:";
+"purchase.quantity" = "Quantity:";
+"purchase.total.price" = "Total Price:";
+"purchase.tax" = "Tax:";
+
+// Price History
+"price.history" = "Price History";
+"price.history.chart" = "Price History Chart";
+
+// Purchase History
+"purchase.history" = "Purchase History";
+"purchase.history.table" = "Purchase History Table";
+
+// Format
+"currency.format" = "R$%.2f";
+"quantity.format" = "%.1f %@";
+"price.label" = "Price: %@";
+"quantity.label" = "Qty: %@";
+"date.label" = "Date: %@"; 

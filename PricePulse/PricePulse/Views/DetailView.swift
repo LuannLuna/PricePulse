@@ -1,4 +1,5 @@
 import SwiftUI
+import Charts
 import SwiftData
 
 struct DetailView: View {

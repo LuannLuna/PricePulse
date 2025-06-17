@@ -13,20 +13,20 @@ struct PriceHistoryChart: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Price History")
+            Text(Strings.priceHistory)
                 .font(.headline)
 
             Chart {
                 ForEach(purchases) { purchase in
                     LineMark(
-                        x: .value("Date", purchase.date),
-                        y: .value("Price", purchase.unitPrice)
+                        x: .value("purchase.date".localized, purchase.date),
+                        y: .value("purchase.unit.price".localized, purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
 
                     PointMark(
-                        x: .value("Date", purchase.date),
-                        y: .value("Price", purchase.unitPrice)
+                        x: .value("purchase.date".localized, purchase.date),
+                        y: .value("purchase.unit.price".localized, purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
                 }
