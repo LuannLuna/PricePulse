@@ -1,29 +1,29 @@
 // App
-"app.title" = "Price Pulse";
+"app.title" = "Pulso de Preço";
 
 // Search
 "search.prompt" = "Produto";
 
 // Purchase Details
-"purchase.last.summary" = "Last Purchase Summary";
-"purchase.store" = "Store:";
-"purchase.date" = "Date:";
-"purchase.unit.price" = "Unit Price:";
-"purchase.quantity" = "Quantity:";
-"purchase.total.price" = "Total Price:";
-"purchase.tax" = "Tax:";
+"purchase.last.summary" = "Resumo da Última Compra";
+"purchase.store" = "Loja:";
+"purchase.date" = "Data:";
+"purchase.unit.price" = "Preço Unitário:";
+"purchase.quantity" = "Quantidade:";
+"purchase.total.price" = "Preço Total:";
+"purchase.tax" = "Imposto:";
 
 // Price History
-"price.history" = "Price History";
-"price.history.chart" = "Price History Chart";
+"price.history" = "Histórico de Preços";
+"price.history.chart" = "Gráfico do Histórico de Preços";
 
 // Purchase History
-"purchase.history" = "Purchase History";
-"purchase.history.table" = "Purchase History Table";
+"purchase.history" = "Histórico de Compras";
+"purchase.history.table" = "Tabela do Histórico de Compras";
 
 // Format
 "currency.format" = "R$%.2f";
 "quantity.format" = "%.1f %@";
-"price.label" = "Price: %@";
-"quantity.label" = "Qty: %@";
-"date.label" = "Date: %@"; 
+"price.label" = "Preço: %@";
+"quantity.label" = "Qtd: %@";
+"date.label" = "Data: %@"; 

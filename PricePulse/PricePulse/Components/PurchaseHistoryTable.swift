@@ -31,12 +31,12 @@ struct PurchaseHistoryTable: View {
                     }
 
                     HStack {
-                        Text(String(format: "currency.format".localized, purchase.unitPrice))
+                        Text(Strings.currencyFormat.localized(purchase.unitPrice))
                             .font(.headline)
 
                         Spacer()
 
-                        Text(String(format: "quantity.format".localized, purchase.quantity, purchase.unit))
+                        Text(Strings.quantityFormat.localized(purchase.quantity, purchase.unit))
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                     }

@@ -18,29 +18,35 @@ struct LastPurchaseSummary: View {
             Grid(alignment: .leading, horizontalSpacing: 20, verticalSpacing: 8) {
                 GridRow {
                     Text(Strings.purchaseStore)
+                    Spacer()
                     Text(purchase.store)
                 }
                 GridRow {
                     Text(Strings.purchaseDate)
+                    Spacer()
                     Text(purchase.date, style: .date)
                 }
                 GridRow {
                     Text(Strings.purchaseUnitPrice)
-                    Text(String(format: "currency.format".localized, purchase.unitPrice))
+                    Spacer()
+                    Text(Strings.currencyFormat.localized(purchase.unitPrice))
                         .font(.title3)
                         .bold()
                 }
                 GridRow {
                     Text(Strings.purchaseQuantity)
-                    Text(String(format: "quantity.format".localized, purchase.quantity, purchase.unit))
+                    Spacer()
+                    Text(Strings.quantityFormat.localized(purchase.quantity, purchase.unit))
                 }
                 GridRow {
                     Text(Strings.purchaseTotalPrice)
-                    Text(String(format: "currency.format".localized, purchase.totalPrice))
+                    Spacer()
+                    Text(Strings.currencyFormat.localized(purchase.totalPrice))
                 }
                 GridRow {
                     Text(Strings.purchaseTax)
-                    Text(String(format: "currency.format".localized, purchase.tax))
+                    Spacer()
+                    Text(Strings.currencyFormat.localized(purchase.tax))
                 }
             }
             .frame(maxWidth: .infinity)

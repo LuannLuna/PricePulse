@@ -12,8 +12,8 @@ extension String {
         NSLocalizedString(self, comment: "")
     }
 
-    func localized(_ arguments: any CVarArg...) -> Self {
-        .init(format: localized, arguments: arguments)
+    func localized(_ arguments: CVarArg...) -> String {
+        String(format: localized, arguments: arguments)
     }
 }
 
@@ -28,7 +28,7 @@ extension RawRepresentable where RawValue == String {
         .init(rawValue)
     }
 
-    func localized(_ arguments: any CVarArg...) -> String {
+    func localized(_ arguments: CVarArg...) -> String {
         rawValue.localized(arguments)
     }
 }

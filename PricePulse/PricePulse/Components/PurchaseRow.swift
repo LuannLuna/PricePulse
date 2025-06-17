@@ -18,7 +18,7 @@ struct PurchaseRow: View {
                 .minimumScaleFactor(0.8)
 
             HStack {
-                Text(String(format: "price.label".localized, String(format: "currency.format".localized, purchase.unitPrice)))
+                Text(Strings.priceLabel.localized(Strings.currencyFormat.localized(purchase.unitPrice)))
                     .font(.subheadline)
                     .bold()
 
@@ -30,13 +30,13 @@ struct PurchaseRow: View {
             }
 
             HStack {
-                Text(String(format: "date.label".localized, purchase.date.formatted(date: .abbreviated, time: .omitted)))
+                Text(Strings.dateLabel.localized(purchase.date.formatted(date: .abbreviated, time: .omitted)))
                     .font(.caption)
                     .foregroundColor(.secondary)
 
                 Spacer()
 
-                Text(String(format: "quantity.label".localized, String(format: "quantity.format".localized, purchase.quantity, purchase.unit)))
+                Text(Strings.quantityLabel.localized(Strings.quantityFormat.localized(purchase.quantity, purchase.unit)))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
