@@ -25,11 +25,6 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // Search bar
-                SearchBar(text: $searchText)
-                    .padding()
-                
-                // Product list
                 List {
                     ForEach(sortedProducts, id: \.0) { productCode, purchase in
                         NavigationLink(destination: DetailView(purchase: purchase)) {
@@ -38,67 +33,9 @@ struct HomeView: View {
                     }
                 }
             }
+            .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "Produto")
             .navigationTitle("Price Pulse")
         }
-    }
-}
-
-struct SearchBar: View {
-    @Binding var text: String
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
-            
-            TextField("Search products...", text: $text)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            if !text.isEmpty {
-                Button(action: { text = "" }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.gray)
-                }
-            }
-        }
-    }
-}
-
-struct PurchaseRow: View {
-    let purchase: PurchaseHistory
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(purchase.itemDescription)
-                .font(.headline)
-                .lineLimit(2)
-                .minimumScaleFactor(0.8)
-            
-            HStack {
-                Text("Price: R$\(purchase.unitPrice, specifier: "%.2f")")
-                    .font(.subheadline)
-                    .bold()
-                
-                Spacer()
-                
-                Text(purchase.store)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-            
-            HStack {
-                Text("Date: \(purchase.date, style: .date)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                
-                Spacer()
-                
-                Text("Qty: \(purchase.quantity, specifier: "%.1f") \(purchase.unit)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-        }
-        .padding(.vertical, 4)
     }
 }
 
