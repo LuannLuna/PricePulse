@@ -25,7 +25,7 @@ struct HomeView: View {
                 // Product list
                 List {
                     ForEach(filteredPurchases) { purchase in
-                        NavigationLink(destination: PurchaseDetailView(purchase: purchase)) {
+                        NavigationLink(destination: DetailView(purchase: purchase)) {
                             PurchaseRow(purchase: purchase)
                         }
                     }
@@ -89,43 +89,6 @@ struct PurchaseRow: View {
             }
         }
         .padding(.vertical, 4)
-    }
-}
-
-struct PurchaseDetailView: View {
-    let purchase: PurchaseHistory
-    
-    var body: some View {
-        List {
-            Section("Product Details") {
-                DetailRow(title: "Description", value: purchase.itemDescription)
-                DetailRow(title: "Product Code", value: purchase.productCode)
-            }
-            
-            Section("Purchase Information") {
-                DetailRow(title: "Store", value: purchase.store)
-                DetailRow(title: "Date", value: purchase.date.formatted(date: .long, time: .omitted))
-                DetailRow(title: "Quantity", value: "\(purchase.quantity) \(purchase.unit)")
-                DetailRow(title: "Unit Price", value: String(format: "R$%.2f", purchase.unitPrice))
-                DetailRow(title: "Total Price", value: String(format: "R$%.2f", purchase.totalPrice))
-                DetailRow(title: "Tax", value: String(format: "R$%.2f", purchase.tax))
-            }
-        }
-        .navigationTitle("Purchase Details")
-    }
-}
-
-struct DetailRow: View {
-    let title: String
-    let value: String
-    
-    var body: some View {
-        HStack {
-            Text(title)
-                .foregroundColor(.secondary)
-            Spacer()
-            Text(value)
-        }
     }
 }
 

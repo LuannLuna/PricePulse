@@ -1,32 +1,40 @@
 import SwiftUI
 import Charts
+import SwiftData
 
 struct DetailView: View {
-    let productCode: String
-    @ObservedObject var viewModel: ProductViewModel
+    let purchase: PurchaseHistory
+    @Query private var allPurchases: [PurchaseHistory]
+    
+    var productPurchases: [PurchaseHistory] {
+        allPurchases.filter { $0.productCode == purchase.productCode }
+            .sorted { $0.date > $1.date }
+    }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                if let lastPurchase = viewModel.getLastPurchase(for: productCode) {
-                    // Last Purchase Summary
-                    LastPurchaseSummary(purchase: lastPurchase)
-                    
-                    // Price History Chart
-                    PriceHistoryChart(purchases: viewModel.getPurchaseHistory(for: productCode))
-                    
-                    // Purchase History Table
-                    PurchaseHistoryTable(purchases: viewModel.getPurchaseHistory(for: productCode))
-                }
+                Text(purchase.itemDescription)
+                    .font(.headline)
+                    .lineLimit(0)
+                    .minimumScaleFactor(0.5)
+                    .multilineTextAlignment(.leading)
+                // Last Purchase Summary
+                LastPurchaseSummary(purchase: purchase)
+                
+                // Price History Chart
+                PriceHistoryChart(purchases: productPurchases)
+                
+                // Purchase History Table
+                PurchaseHistoryTable(purchases: productPurchases)
             }
             .padding()
         }
-        .navigationTitle(viewModel.getLastPurchase(for: productCode)?.productName ?? "Product Details")
     }
 }
 
 struct LastPurchaseSummary: View {
-    let purchase: ProductPurchase
+    let purchase: PurchaseHistory
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -44,7 +52,9 @@ struct LastPurchaseSummary: View {
                 }
                 GridRow {
                     Text("Unit Price:")
-                    Text("$\(purchase.unitPrice, specifier: "%.2f")")
+                    Text("R$\(purchase.unitPrice, specifier: "%.2f")")
+                        .font(.title3)
+                        .bold()
                 }
                 GridRow {
                     Text("Quantity:")
@@ -52,13 +62,14 @@ struct LastPurchaseSummary: View {
                 }
                 GridRow {
                     Text("Total Price:")
-                    Text("$\(purchase.totalPrice, specifier: "%.2f")")
+                    Text("R$\(purchase.totalPrice, specifier: "%.2f")")
                 }
                 GridRow {
                     Text("Tax:")
-                    Text("$\(purchase.tax, specifier: "%.2f")")
+                    Text("R$\(purchase.tax, specifier: "%.2f")")
                 }
             }
+            .frame(maxWidth: .infinity)
         }
         .padding()
         .background(Color(.systemBackground))
@@ -68,7 +79,7 @@ struct LastPurchaseSummary: View {
 }
 
 struct PriceHistoryChart: View {
-    let purchases: [ProductPurchase]
+    let purchases: [PurchaseHistory]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -100,7 +111,7 @@ struct PriceHistoryChart: View {
 }
 
 struct PurchaseHistoryTable: View {
-    let purchases: [ProductPurchase]
+    let purchases: [PurchaseHistory]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -118,10 +129,12 @@ struct PurchaseHistoryTable: View {
                         Text(purchase.store)
                             .font(.subheadline)
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
                     }
                     
                     HStack {
-                        Text("$\(purchase.unitPrice, specifier: "%.2f")")
+                        Text("R$\(purchase.unitPrice, specifier: "%.2f")")
                             .font(.headline)
                         
                         Spacer()
