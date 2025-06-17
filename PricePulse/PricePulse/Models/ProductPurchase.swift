@@ -13,9 +13,9 @@ struct ProductPurchase: Identifiable, Codable {
     let tax: Double
     let category: String
     
-    init(id: UUID = UUID(), date: Date, store: String, productCode: String, productName: String,
+    init(date: Date, store: String, productCode: String, productName: String,
          quantity: Double, unit: String, unitPrice: Double, totalPrice: Double, tax: Double, category: String) {
-        self.id = id
+        self.id = UUID(uuidString: productCode + date.formatted()) ?? .init()
         self.date = date
         self.store = store
         self.productCode = productCode

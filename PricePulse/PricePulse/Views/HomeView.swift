@@ -100,7 +100,6 @@ struct PurchaseDetailView: View {
             Section("Product Details") {
                 DetailRow(title: "Description", value: purchase.itemDescription)
                 DetailRow(title: "Product Code", value: purchase.productCode)
-                DetailRow(title: "Category", value: purchase.category)
             }
             
             Section("Purchase Information") {

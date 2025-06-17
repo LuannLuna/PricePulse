@@ -3,29 +3,31 @@ import SwiftData
 
 @Model
 final class PurchaseHistory: Identifiable {
-    @Attribute(.unique) var id: UUID
-    var date: Date
+    @Attribute(.unique) var id: String
     var store: String
+    var cnpj: String
+    var date: Date
     var productCode: String
     var itemDescription: String
     var quantity: Double
     var unit: String
     var unitPrice: Double
-    var totalPrice: Double
     var tax: Double
-    var category: String
+    var totalPrice: Double
     
-    init(date: Date, store: String, productCode: String, itemDescription: String, quantity: Double, unit: String, unitPrice: Double, totalPrice: Double, tax: Double, category: String) {
-        self.date = date
+    init(id: String, store: String, cnpj: String, date: Date, productCode: String, 
+         itemDescription: String, quantity: Double, unit: String, unitPrice: Double, 
+         tax: Double, totalPrice: Double) {
+        self.id = id
         self.store = store
+        self.cnpj = cnpj
+        self.date = date
         self.productCode = productCode
         self.itemDescription = itemDescription
         self.quantity = quantity
         self.unit = unit
         self.unitPrice = unitPrice
-        self.totalPrice = totalPrice
         self.tax = tax
-        self.category = category
-        self.id = UUID(uuidString: productCode) ?? .init()
+        self.totalPrice = totalPrice
     }
 }
