@@ -33,8 +33,8 @@ struct HomeView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: "search.prompt".localized)
-            .navigationTitle("app.title".localized)
+            .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Strings.searchPrompt.localized())
+            .navigationTitle(Strings.appTitle.localized())
         }
     }
 }

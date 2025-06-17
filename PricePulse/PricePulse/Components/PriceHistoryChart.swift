@@ -19,14 +19,14 @@ struct PriceHistoryChart: View {
             Chart {
                 ForEach(purchases) { purchase in
                     LineMark(
-                        x: .value("purchase.date".localized, purchase.date),
-                        y: .value("purchase.unit.price".localized, purchase.unitPrice)
+                        x: .value(Strings.purchaseDate.localized(), purchase.date),
+                        y: .value(Strings.purchaseUnitPrice.localized(), purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
 
                     PointMark(
-                        x: .value("purchase.date".localized, purchase.date),
-                        y: .value("purchase.unit.price".localized, purchase.unitPrice)
+                        x: .value(Strings.purchaseDate.localized(), purchase.date),
+                        y: .value(Strings.purchaseUnitPrice.localized(), purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
                 }
