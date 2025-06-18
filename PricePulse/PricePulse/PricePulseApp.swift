@@ -25,14 +25,16 @@ struct PricePulseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .onAppear {
-                    if let csvURL = Bundle.main.url(forResource: "HistoricoCompras", withExtension: "csv") {
-                        CSVLoader.loadPurchaseHistory(from: csvURL, modelContext: sharedModelContainer.mainContext)
-                    } else {
-                        print("CSV file not found.")
-                    }
+            RouterView {
+                HomeView()
+            }
+            .onAppear {
+                if let csvURL = Bundle.main.url(forResource: "HistoricoCompras", withExtension: "csv") {
+                    CSVLoader.loadPurchaseHistory(from: csvURL, modelContext: sharedModelContainer.mainContext)
+                } else {
+                    print("CSV file not found.")
                 }
+            }
         }
         .modelContainer(sharedModelContainer)
     }

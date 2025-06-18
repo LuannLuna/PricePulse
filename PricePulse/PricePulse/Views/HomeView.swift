@@ -4,6 +4,7 @@ import SwiftData
 struct HomeView: View {
     @Query private var purchases: [PurchaseHistory]
     @State private var searchText = ""
+    @Environment(Router.self) private var router
     
     var groupedPurchases: [String: PurchaseHistory] {
         let filtered = searchText.isEmpty ? purchases : purchases.filter { purchase in
@@ -23,19 +24,21 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                List {
-                    ForEach(sortedProducts, id: \.0) { productCode, purchase in
-                        NavigationLink(destination: DetailView(purchase: purchase)) {
-                            PurchaseRow(purchase: purchase)
+        VStack {
+            List {
+                ForEach(sortedProducts, id: \.0) { productCode, purchase in
+                    PurchaseRow(purchase: purchase)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            router.push(.detailView(purchase))
                         }
-                    }
                 }
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Strings.searchPrompt.localized())
-            .navigationTitle(Strings.appTitle.localized())
+            .listStyle(.plain)
+            
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Strings.searchPrompt.localized())
+        .navigationTitle(Strings.appTitle.localized())
     }
 }
 
