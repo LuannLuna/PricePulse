@@ -16,6 +16,9 @@
 // Price History
 "price.history" = "Histórico de Preços";
 "price.history.chart" = "Gráfico do Histórico de Preços";
+"price.history.popup.price" = "Preço: %@";
+"price.history.popup.date" = "Data: %@";
+"price.history.popup.store" = "Loja: %@";
 
 // Purchase History
 "purchase.history" = "Histórico de Compras";
