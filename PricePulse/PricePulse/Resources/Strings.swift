@@ -11,6 +11,13 @@ enum Strings: String {
     // App
     case appTitle = "app.title"
 
+    // Statistics
+    case statistics = "statistics"
+    case selectMonth = "select.month"
+    case monthlyTotal = "monthly.total"
+    case totalPerStore = "total.per.store"
+    case storeBreakdown = "store.breakdown"
+
     // Search
     case searchPrompt = "search.prompt"
 

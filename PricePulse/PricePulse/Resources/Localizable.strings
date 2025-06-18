@@ -29,4 +29,11 @@
 "quantity.format" = "%.1f %@";
 "price.label" = "Preço: %@";
 "quantity.label" = "Qtd: %@";
-"date.label" = "Data: %@"; 
+"date.label" = "Data: %@";
+
+// Statistics
+"statistics" = "Estatísticas";
+"select.month" = "Selecionar mês";
+"monthly.total" = "Total mensal";
+"total.per.store" = "Total por loja";
+"store.breakdown" = "Detalhamento por loja";

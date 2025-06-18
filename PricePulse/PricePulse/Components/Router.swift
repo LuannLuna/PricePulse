@@ -80,7 +80,7 @@ struct RouterView: View {
                 StatisticsView()
             }
             .tabItem {
-                Label("Statistics", systemImage: "chart.bar.fill")
+                Label(Strings.statistics.localizable, systemImage: "chart.bar.fill")
             }
             .tag(TabDestination.statistics)
         }

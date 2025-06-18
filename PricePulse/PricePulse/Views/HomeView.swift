@@ -34,7 +34,7 @@ struct HomeView: View {
                         }
                 }
             }
-            .listStyle(.plain)
+            .listStyle(.sidebar)
             
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Strings.searchPrompt.localized())

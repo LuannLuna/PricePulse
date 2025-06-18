@@ -25,7 +25,7 @@ struct StatisticsView: View {
             VStack(spacing: 20) {
                 // Month Picker
                 DatePicker(
-                    "Select Month",
+                    Strings.selectMonth.localizable,
                     selection: $selectedMonth,
                     displayedComponents: .date
                 )
@@ -34,7 +34,7 @@ struct StatisticsView: View {
                 
                 // Monthly Total Card
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Monthly Total")
+                    Text(Strings.monthlyTotal.localizable)
                         .font(.headline)
                     
                     Text(Strings.currencyFormat.localized(monthlyTotal))
@@ -49,7 +49,7 @@ struct StatisticsView: View {
                 
                 // Store Totals Chart
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Total per Store")
+                    Text(Strings.totalPerStore.localizable)
                         .font(.headline)
                     
                     Chart {
@@ -76,7 +76,7 @@ struct StatisticsView: View {
                 
                 // Store Totals List
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Store Breakdown")
+                    Text(Strings.storeBreakdown.localizable)
                         .font(.headline)
                     
                     ForEach(storeTotals, id: \.store) { store in
@@ -104,7 +104,7 @@ struct StatisticsView: View {
             }
             .padding()
         }
-        .navigationTitle("Statistics")
+        .navigationTitle(Strings.statistics.localizable)
         .background(Color(.systemGroupedBackground))
     }
 }
