@@ -25,9 +25,7 @@ struct PricePulseApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RouterView {
-                HomeView()
-            }
+            RouterView()
             .onAppear {
                 if let csvURL = Bundle.main.url(forResource: "HistoricoCompras", withExtension: "csv") {
                     CSVLoader.loadPurchaseHistory(from: csvURL, modelContext: sharedModelContainer.mainContext)

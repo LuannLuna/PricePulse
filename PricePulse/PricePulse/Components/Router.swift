@@ -1,5 +1,10 @@
 import SwiftUI
 
+enum TabDestination: Hashable {
+    case home
+    case statistics
+}
+
 enum NavigationDestination: Hashable {
     case home
     case detailView(PurchaseHistory)
@@ -14,6 +19,7 @@ final class Router {
     var navigationPath = NavigationPath()
     var presentedSheet: NavigationDestination?
     var presentedFullScreenCover: NavigationDestination?
+    var selectedTab: TabDestination = .home
     
     func push(_ destination: NavigationDestination) {
         navigationPath.append(destination)
@@ -42,28 +48,41 @@ final class Router {
     func pop() {
         navigationPath.removeLast()
     }
+    
+    func selectTab(_ tab: TabDestination) {
+        selectedTab = tab
+    }
 }
 
-struct RouterView<Content: View>: View {
+struct RouterView: View {
     @State private var router = Router()
-    let content: Content
-    
-    init(@ViewBuilder content: () -> Content) {
-        self.content = content()
-    }
     
     var body: some View {
-        NavigationStack(path: $router.navigationPath) {
-            content
-                .navigationDestination(for: NavigationDestination.self) { destination in
-                    destinationView(for: destination)
-                }
-                .sheet(item: $router.presentedSheet) { destination in
-                    destinationView(for: destination)
-                }
-                .fullScreenCover(item: $router.presentedFullScreenCover) { destination in
-                    destinationView(for: destination)
-                }
+        TabView(selection: $router.selectedTab) {
+            NavigationStack(path: $router.navigationPath) {
+                HomeView()
+                    .navigationDestination(for: NavigationDestination.self) { destination in
+                        destinationView(for: destination)
+                    }
+                    .sheet(item: $router.presentedSheet) { destination in
+                        destinationView(for: destination)
+                    }
+                    .fullScreenCover(item: $router.presentedFullScreenCover) { destination in
+                        destinationView(for: destination)
+                    }
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
+            .tag(TabDestination.home)
+            
+            NavigationStack {
+                StatisticsView()
+            }
+            .tabItem {
+                Label("Statistics", systemImage: "chart.bar.fill")
+            }
+            .tag(TabDestination.statistics)
         }
         .environment(router)
     }
