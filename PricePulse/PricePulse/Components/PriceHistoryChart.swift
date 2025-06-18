@@ -43,8 +43,9 @@ struct PriceHistoryChart: View {
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { value in
-                                    let x = value.location.x - geometry[proxy.plotAreaFrame].origin.x
-                                    guard x >= 0, x <= geometry[proxy.plotAreaFrame].width else { return }
+                                    guard let plotFrame = proxy.plotFrame else { return }
+                                    let x = value.location.x - geometry[plotFrame].origin.x
+                                    guard x >= 0, x <= geometry[plotFrame].width else { return }
 
                                     let date = proxy.value(atX: x) as Date?
                                     guard let date = date else { return }
