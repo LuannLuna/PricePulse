@@ -6,6 +6,19 @@ struct StatisticsView: View {
     @Query private var purchases: [PurchaseHistory]
     @State private var selectedMonth: Date = Date()
     
+    private var months: [Int] { Array(1...12) }
+    private var years: [Int] {
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: Date())
+        return Array((currentYear-10)...currentYear)
+    }
+    private var selectedMonthComponent: Int {
+        Calendar.current.component(.month, from: selectedMonth)
+    }
+    private var selectedYearComponent: Int {
+        Calendar.current.component(.year, from: selectedMonth)
+    }
+    
     private var monthlyPurchases: [PurchaseHistory] {
         purchases.filter { Calendar.current.isDate($0.date, equalTo: selectedMonth, toGranularity: .month) }
     }
@@ -23,13 +36,36 @@ struct StatisticsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                // Month Picker
-                DatePicker(
-                    Strings.selectMonth.localizable,
-                    selection: $selectedMonth,
-                    displayedComponents: .date
-                )
-                .datePickerStyle(.compact)
+                // Month and Year Pickers
+                HStack {
+                    Picker(Strings.month.localizable, selection: Binding(
+                        get: { selectedMonthComponent },
+                        set: { newMonth in
+                            if let newDate = Calendar.current.date(from: DateComponents(year: selectedYearComponent, month: newMonth)) {
+                                selectedMonth = newDate
+                            }
+                        })
+                    ) {
+                        ForEach(months, id: \.self) { month in
+                            Text(DateFormatter().monthSymbols[month - 1]).tag(month)
+                        }
+                    }
+                    .pickerStyle(.menu)
+
+                    Picker(Strings.year.localizable, selection: Binding(
+                        get: { selectedYearComponent },
+                        set: { newYear in
+                            if let newDate = Calendar.current.date(from: DateComponents(year: newYear, month: selectedMonthComponent)) {
+                                selectedMonth = newDate
+                            }
+                        })
+                    ) {
+                        ForEach(years, id: \.self) { year in
+                            Text(year.description).tag(year)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
                 .padding(.horizontal)
                 
                 // Monthly Total Card
@@ -55,8 +91,8 @@ struct StatisticsView: View {
                     Chart {
                         ForEach(storeTotals, id: \.store) { store in
                             BarMark(
-                                x: .value("Store", store.store),
-                                y: .value("Total", store.total)
+                                x: .value(Strings.store.localizable, store.store),
+                                y: .value(Strings.total.localizable, store.total)
                             )
                             .foregroundStyle(.blue.gradient)
                         }

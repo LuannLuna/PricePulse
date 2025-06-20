@@ -17,6 +17,10 @@ enum Strings: String {
     case monthlyTotal = "monthly.total"
     case totalPerStore = "total.per.store"
     case storeBreakdown = "store.breakdown"
+    case month
+    case year
+    case store
+    case total
 
     // Search
     case searchPrompt = "search.prompt"

@@ -37,3 +37,7 @@
 "monthly.total" = "Total mensal";
 "total.per.store" = "Total por loja";
 "store.breakdown" = "Detalhamento por loja";
+"month" = "Mês";
+"year" = "Ano";
+"store" = "Loja";
+"total" = "Total";
