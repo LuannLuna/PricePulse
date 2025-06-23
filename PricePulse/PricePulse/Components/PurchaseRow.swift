@@ -60,21 +60,40 @@ struct PurchaseRow: View {
     }
 }
 
+#if DEBUG
 #Preview {
-    PurchaseRow(
-        purchase: .init(
-            id: "MCJ_20250531_091565",
-            store: "MCJ SUPERMERCADOS LTDA",
-            cnpj: "55.167.151/0002-01",
-            date: Date(),
-            productCode: "2025,91565",
-            itemDescription: "BIFE DE FIGADO KG",
-            quantity: 0.612,
-            unit: "KG",
-            unitPrice: 18.99,
-            tax: 1.88,
-            totalPrice: 11.62
+    List {
+        PurchaseRow(
+            purchase: .init(
+                id: "MCJ_20250531_091565",
+                store: "MCJ SUPERMERCADOS LTDA",
+                cnpj: "55.167.151/0002-01",
+                date: Date(),
+                productCode: "2025,91565",
+                itemDescription: "BIFE DE FIGADO KG",
+                quantity: 0.612,
+                unit: "KG",
+                unitPrice: 18.99,
+                tax: 1.88,
+                totalPrice: 11.62
+            )
         )
-    )
-    .padding()
+        PurchaseRow(
+            purchase: .init(
+                id: "MCJ_20250531_091565",
+                store: "MCJ SUPERMERCADOS LTDA",
+                cnpj: "55.167.151/0002-01",
+                date: Date(),
+                productCode: "2025,91565",
+                itemDescription: "BIFE DE FIGADO KG",
+                quantity: 0.612,
+                unit: "KG",
+                unitPrice: 18.99,
+                tax: 1.88,
+                totalPrice: 11.62
+            )
+        )
+    }
+    .listStyle(.sidebar)
 }
+#endif

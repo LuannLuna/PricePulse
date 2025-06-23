@@ -35,13 +35,31 @@ struct HomeView: View {
                 }
             }
             .listStyle(.sidebar)
-            
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer, prompt: Strings.searchPrompt.localized())
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer,
+            prompt: Strings.searchPrompt.localized()
+        )
         .navigationTitle(Strings.appTitle.localized())
     }
 }
 
-#Preview {
-    HomeView()
+#if DEBUG
+struct HomeView_Previews: View {
+    @State private var router = Router()
+    var body: some View {
+        NavigationStack(path: $router.navigationPath) {
+            HomeView()
+                .environment(router)
+                .onAppear(perform: loadCSV)
+                .modelContainer(Previews.modelContainer)
+        }
+    }
 }
+
+#Preview {
+    HomeView_Previews()
+}
+
+#endif

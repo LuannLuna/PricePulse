@@ -147,4 +147,6 @@ struct StatisticsView: View {
 
 #Preview {
     StatisticsView()
-} 
+        .modelContainer(Previews.modelContainer)
+        .onAppear(perform: loadCSV)
+}
