@@ -27,7 +27,9 @@ struct HomeView: View {
         VStack {
             List {
                 ForEach(sortedProducts, id: \.0) { productCode, purchase in
-                    PurchaseRow(purchase: purchase)
+                    let productPurchases = purchases.filter { $0.productCode == productCode }.sorted { $0.date > $1.date }
+                    let previousPurchase = productPurchases.count > 1 ? productPurchases[1] : nil
+                    PurchaseRow(purchase: purchase, previousPurchase: previousPurchase)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             router.push(.detailView(purchase))
