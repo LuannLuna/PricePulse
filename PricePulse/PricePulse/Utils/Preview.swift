@@ -11,7 +11,12 @@ import SwiftData
 #if DEBUG
 enum Previews {
     static let modelContainer = {
-        let schema = Schema([PurchaseHistory.self])
+        let schema = Schema([
+            Product.self,
+            Purchase.self,
+            PurchaseItem.self,
+            Supermarket.self
+        ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
         let container = try! ModelContainer(for: schema, configurations: [modelConfiguration])
         return container

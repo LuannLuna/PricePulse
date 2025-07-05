@@ -3,7 +3,7 @@ import SwiftData
 import Charts
 
 struct StatisticsView: View {
-    @Query private var purchases: [PurchaseHistory]
+    @Query private var purchaseItems: [PurchaseItem]
     @State private var selectedMonth: Date = Date()
     
     private var months: [Int] { Array(1...12) }
@@ -19,18 +19,18 @@ struct StatisticsView: View {
         Calendar.current.component(.year, from: selectedMonth)
     }
     
-    private var monthlyPurchases: [PurchaseHistory] {
-        purchases.filter { Calendar.current.isDate($0.date, equalTo: selectedMonth, toGranularity: .month) }
+    private var monthlyPurchases: [PurchaseItem] {
+        purchaseItems.filter { Calendar.current.isDate($0.purchase.date, equalTo: selectedMonth, toGranularity: .month) }
     }
     
     private var storeTotals: [(store: String, total: Double)] {
-        let grouped = Dictionary(grouping: monthlyPurchases) { $0.store }
-        return grouped.map { (store: $0.key, total: $0.value.reduce(0) { $0 + $1.totalPrice }) }
+        let grouped = Dictionary(grouping: monthlyPurchases) { $0.purchase.supermarket.name }
+        return grouped.map { (store: $0.key, total: $0.value.reduce(0) { $0 + $1.total }) }
             .sorted { $0.total > $1.total }
     }
     
     private var monthlyTotal: Double {
-        monthlyPurchases.reduce(0) { $0 + $1.totalPrice }
+        monthlyPurchases.reduce(0) { $0 + $1.total }
     }
     
     var body: some View {

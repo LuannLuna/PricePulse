@@ -9,8 +9,8 @@ import SwiftUI
 import Charts
 
 struct PriceHistoryChart: View {
-    let purchases: [PurchaseHistory]
-    @Binding var selectedPurchase: PurchaseHistory?
+    let purchases: [PurchaseItem]
+    @Binding var selectedPurchase: PurchaseItem?
     @Binding var showPopup: Bool
 
     var body: some View {
@@ -19,15 +19,15 @@ struct PriceHistoryChart: View {
                 .font(.headline)
 
             Chart {
-                ForEach(purchases) { purchase in
+                ForEach(purchases.sorted(by: { $0.purchase.date < $1.purchase.date }), id: \.id) { purchase in
                     LineMark(
-                        x: .value(Strings.purchaseDate.localized(), purchase.date),
+                        x: .value(Strings.purchaseDate.localized(), purchase.purchase.date),
                         y: .value(Strings.purchaseUnitPrice.localized(), purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
 
                     PointMark(
-                        x: .value(Strings.purchaseDate.localized(), purchase.date),
+                        x: .value(Strings.purchaseDate.localized(), purchase.purchase.date),
                         y: .value(Strings.purchaseUnitPrice.localized(), purchase.unitPrice)
                     )
                     .foregroundStyle(.blue)
@@ -52,7 +52,7 @@ struct PriceHistoryChart: View {
 
                                     // Find the closest purchase to the tapped point
                                     if let closest = purchases.min(by: {
-                                        abs($0.date.timeIntervalSince(date)) < abs($1.date.timeIntervalSince(date))
+                                        abs($0.purchase.date.timeIntervalSince(date)) < abs($1.purchase.date.timeIntervalSince(date))
                                     }) {
                                         selectedPurchase = closest
                                         showPopup = true
@@ -69,58 +69,58 @@ struct PriceHistoryChart: View {
     }
 }
 
-struct PriceHistoryChart_Previews: View {
-    @State var selectedPurchase: PurchaseHistory? = nil
-    @State var showPopup = false
-    var body: some View {
-        PriceHistoryChart(
-            purchases: [
-                .init(
-                    id: "MCJ_20250531_091565",
-                    store: "MCJ SUPERMERCADOS LTDA",
-                    cnpj: "55.167.151/0002-01",
-                    date: Date(),
-                    productCode: "2025,91565",
-                    itemDescription: "BIFE DE FIGADO KG",
-                    quantity: 0.612,
-                    unit: "KG",
-                    unitPrice: 18.99,
-                    tax: 1.88,
-                    totalPrice: 11.62
-                ),
-                .init(
-                    id: "MCJ_20250531_091565",
-                    store: "MCJ SUPERMERCADOS LTDA",
-                    cnpj: "55.167.151/0002-01",
-                    date: Date(),
-                    productCode: "2025,91565",
-                    itemDescription: "BIFE DE FIGADO KG",
-                    quantity: 0.612,
-                    unit: "KG",
-                    unitPrice: 20.99,
-                    tax: 1.88,
-                    totalPrice: 12.62
-                ),
-                .init(
-                    id: "MCJ_20250531_091565",
-                    store: "MCJ SUPERMERCADOS LTDA",
-                    cnpj: "55.167.151/0002-01",
-                    date: Date(),
-                    productCode: "2025,91565",
-                    itemDescription: "BIFE DE FIGADO KG",
-                    quantity: 0.612,
-                    unit: "KG",
-                    unitPrice: 25.99,
-                    tax: 1.88,
-                    totalPrice: 12.62
-                )
-            ],
-            selectedPurchase: $selectedPurchase,
-            showPopup: $showPopup
-        )
-    }
-}
-
-#Preview {
-    PriceHistoryChart_Previews()
-}
+//struct PriceHistoryChart_Previews: View {
+//    @State var selectedPurchase: PurchaseHistory? = nil
+//    @State var showPopup = false
+//    var body: some View {
+//        PriceHistoryChart(
+//            purchases: [
+//                .init(
+//                    id: "MCJ_20250531_091565",
+//                    store: "MCJ SUPERMERCADOS LTDA",
+//                    cnpj: "55.167.151/0002-01",
+//                    date: Date(),
+//                    productCode: "2025,91565",
+//                    itemDescription: "BIFE DE FIGADO KG",
+//                    quantity: 0.612,
+//                    unit: "KG",
+//                    unitPrice: 18.99,
+//                    tax: 1.88,
+//                    totalPrice: 11.62
+//                ),
+//                .init(
+//                    id: "MCJ_20250531_091565",
+//                    store: "MCJ SUPERMERCADOS LTDA",
+//                    cnpj: "55.167.151/0002-01",
+//                    date: Date(),
+//                    productCode: "2025,91565",
+//                    itemDescription: "BIFE DE FIGADO KG",
+//                    quantity: 0.612,
+//                    unit: "KG",
+//                    unitPrice: 20.99,
+//                    tax: 1.88,
+//                    totalPrice: 12.62
+//                ),
+//                .init(
+//                    id: "MCJ_20250531_091565",
+//                    store: "MCJ SUPERMERCADOS LTDA",
+//                    cnpj: "55.167.151/0002-01",
+//                    date: Date(),
+//                    productCode: "2025,91565",
+//                    itemDescription: "BIFE DE FIGADO KG",
+//                    quantity: 0.612,
+//                    unit: "KG",
+//                    unitPrice: 25.99,
+//                    tax: 1.88,
+//                    totalPrice: 12.62
+//                )
+//            ],
+//            selectedPurchase: $selectedPurchase,
+//            showPopup: $showPopup
+//        )
+//    }
+//}
+//
+//#Preview {
+//    PriceHistoryChart_Previews()
+//}

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PurchaseRow: View {
-    let purchase: PurchaseHistory
-    let previousPurchase: PurchaseHistory?
+    let purchase: PurchaseItem
+    let previousPurchase: PurchaseItem?
 
     var priceChange: (percent: Double, absolute: Double)? {
         guard let previous = previousPurchase else { return nil }
@@ -27,7 +27,7 @@ struct PurchaseRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(purchase.itemDescription)
+            Text(purchase.product.name)
                 .font(.headline)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
@@ -65,7 +65,7 @@ struct PurchaseRow: View {
 
                 Spacer()
 
-                Text(purchase.store)
+                Text(purchase.purchase.supermarket.name)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -73,7 +73,7 @@ struct PurchaseRow: View {
             HStack {
                 Text(
                     Strings.dateLabel.localized(
-                        purchase.date.formatted(
+                        purchase.purchase.date.formatted(
                             date: .abbreviated,
                             time: .omitted
                         )
@@ -86,7 +86,7 @@ struct PurchaseRow: View {
 
                 Text(
                     Strings.quantityLabel.localized(
-                        Strings.quantityFormat.localized(purchase.quantity, purchase.unit)
+                        Strings.quantityFormat.localized(purchase.quantity, purchase.product.unit)
                     )
                 )
                     .font(.caption)
@@ -97,54 +97,54 @@ struct PurchaseRow: View {
     }
 }
 
-#if DEBUG
-#Preview {
-    List {
-        PurchaseRow(
-            purchase: .init(
-                id: "MCJ_20250531_091565",
-                store: "MCJ SUPERMERCADOS LTDA",
-                cnpj: "55.167.151/0002-01",
-                date: Date(),
-                productCode: "2025,91565",
-                itemDescription: "BIFE DE FIGADO KG",
-                quantity: 0.612,
-                unit: "KG",
-                unitPrice: 18.99,
-                tax: 1.88,
-                totalPrice: 11.62
-            ),
-            previousPurchase: nil
-        )
-        PurchaseRow(
-            purchase: .init(
-                id: "MCJ_20250531_091565",
-                store: "MCJ SUPERMERCADOS LTDA",
-                cnpj: "55.167.151/0002-01",
-                date: Date(),
-                productCode: "2025,91565",
-                itemDescription: "BIFE DE FIGADO KG",
-                quantity: 0.612,
-                unit: "KG",
-                unitPrice: 18.99,
-                tax: 1.88,
-                totalPrice: 11.62
-            ),
-            previousPurchase: .init(
-                id: "MCJ_20250531_091565",
-                store: "MCJ SUPERMERCADOS LTDA",
-                cnpj: "55.167.151/0002-01",
-                date: Date(),
-                productCode: "2025,91565",
-                itemDescription: "BIFE DE FIGADO KG",
-                quantity: 0.612,
-                unit: "KG",
-                unitPrice: 20.99,
-                tax: 1.88,
-                totalPrice: 11.62
-            )
-        )
-    }
-    .listStyle(.sidebar)
-}
-#endif
+//#if DEBUG
+//#Preview {
+//    List {
+//        PurchaseRow(
+//            purchase: .init(
+//                id: "MCJ_20250531_091565",
+//                store: "MCJ SUPERMERCADOS LTDA",
+//                cnpj: "55.167.151/0002-01",
+//                date: Date(),
+//                productCode: "2025,91565",
+//                itemDescription: "BIFE DE FIGADO KG",
+//                quantity: 0.612,
+//                unit: "KG",
+//                unitPrice: 18.99,
+//                tax: 1.88,
+//                totalPrice: 11.62
+//            ),
+//            previousPurchase: nil
+//        )
+//        PurchaseRow(
+//            purchase: .init(
+//                id: "MCJ_20250531_091565",
+//                store: "MCJ SUPERMERCADOS LTDA",
+//                cnpj: "55.167.151/0002-01",
+//                date: Date(),
+//                productCode: "2025,91565",
+//                itemDescription: "BIFE DE FIGADO KG",
+//                quantity: 0.612,
+//                unit: "KG",
+//                unitPrice: 18.99,
+//                tax: 1.88,
+//                totalPrice: 11.62
+//            ),
+//            previousPurchase: .init(
+//                id: "MCJ_20250531_091565",
+//                store: "MCJ SUPERMERCADOS LTDA",
+//                cnpj: "55.167.151/0002-01",
+//                date: Date(),
+//                productCode: "2025,91565",
+//                itemDescription: "BIFE DE FIGADO KG",
+//                quantity: 0.612,
+//                unit: "KG",
+//                unitPrice: 20.99,
+//                tax: 1.88,
+//                totalPrice: 11.62
+//            )
+//        )
+//    }
+//    .listStyle(.sidebar)
+//}
+//#endif

@@ -12,7 +12,10 @@ import SwiftData
 struct PricePulseApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            PurchaseHistory.self
+            Product.self,
+            Purchase.self,
+            PurchaseItem.self,
+            Supermarket.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
