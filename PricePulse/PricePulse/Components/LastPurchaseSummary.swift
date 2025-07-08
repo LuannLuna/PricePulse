@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LastPurchaseSummary: View {
-    let purchase: PurchaseHistory
+    let purchase: PurchaseItem
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -19,12 +19,12 @@ struct LastPurchaseSummary: View {
                 GridRow {
                     Text(Strings.purchaseStore)
                     Spacer()
-                    Text(purchase.store)
+                    Text(purchase.purchase.supermarket.name)
                 }
                 GridRow {
                     Text(Strings.purchaseDate)
                     Spacer()
-                    Text(purchase.date, style: .date)
+                    Text(purchase.purchase.date, style: .date)
                 }
                 GridRow {
                     Text(Strings.purchaseUnitPrice)
@@ -36,12 +36,12 @@ struct LastPurchaseSummary: View {
                 GridRow {
                     Text(Strings.purchaseQuantity)
                     Spacer()
-                    Text(Strings.quantityFormat.localized(purchase.quantity, purchase.unit))
+                    Text(Strings.quantityFormat.localized(purchase.quantity, purchase.product.unit))
                 }
                 GridRow {
                     Text(Strings.purchaseTotalPrice)
                     Spacer()
-                    Text(Strings.currencyFormat.localized(purchase.totalPrice))
+                    Text(Strings.currencyFormat.localized(purchase.product.purchaseItems.reduce(0, { $0 + $1.total })))
                 }
                 GridRow {
                     Text(Strings.purchaseTax)
@@ -59,19 +59,5 @@ struct LastPurchaseSummary: View {
 }
 
 #Preview {
-    LastPurchaseSummary(
-        purchase: .init(
-            id: "MCJ_20250531_091565",
-            store: "MCJ SUPERMERCADOS LTDA",
-            cnpj: "55.167.151/0002-01",
-            date: Date(),
-            productCode: "2025,91565",
-            itemDescription: "BIFE DE FIGADO KG",
-            quantity: 0.612,
-            unit: "KG",
-            unitPrice: 18.99,
-            tax: 1.88,
-            totalPrice: 11.62
-        )
-    )
+    LastPurchaseSummary(purchase: .mock)
 }

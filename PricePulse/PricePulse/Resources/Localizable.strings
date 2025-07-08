@@ -41,3 +41,31 @@
 "year" = "Ano";
 "store" = "Loja";
 "total" = "Total";
+
+// Comparison
+"comparison.title" = "Comparar Produtos";
+"comparison.product.a" = "Produto A";
+"comparison.product.b" = "Produto B";
+"comparison.section" = "Comparação";
+"comparison.name" = "Nome";
+"comparison.units.per.package" = "Unidades por pacote";
+"comparison.amount.per.unit" = "Quantidade por unidade (ex: 300)";
+"comparison.amount.unit" = "Unidade de quantidade";
+"comparison.price" = "Preço (R$)";
+"comparison.better.value" = "%@ oferece melhor custo-benefício.";
+"comparison.same.value" = "Ambos os produtos oferecem o mesmo custo-benefício.";
+"comparison.per.base.unit" = "R$%.2f por %@";
+
+"comparison.unit.milliliter" = "ml";
+"comparison.unit.liter" = "l";
+"comparison.unit.gram" = "g";
+"comparison.unit.kilogram" = "kg";
+"comparison.unit.meter" = "m";
+"comparison.unit.unit" = "un";
+
+"comparison.display.milliliter" = "Milliliter (ml)";
+"comparison.display.liter" = "Liter (l)";
+"comparison.display.gram" = "Gram (g)";
+"comparison.display.kilogram" = "Kilogram (kg)";
+"comparison.display.meter" = "Meter (m)";
+"comparison.display.unit" = "Unit (un)";

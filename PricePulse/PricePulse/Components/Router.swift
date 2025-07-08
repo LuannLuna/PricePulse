@@ -3,11 +3,12 @@ import SwiftUI
 enum TabDestination: Hashable {
     case home
     case statistics
+    case comparison
 }
 
 enum NavigationDestination: Hashable {
     case home
-    case detailView(PurchaseHistory)
+    case detailView(PurchaseItem)
     case productDetail(String)
     case purchaseHistory(String)
     case settings
@@ -83,6 +84,14 @@ struct RouterView: View {
                 Label(Strings.statistics.localizable, systemImage: "chart.bar.fill")
             }
             .tag(TabDestination.statistics)
+
+            NavigationStack {
+                ProductComparisonView()
+            }
+            .tabItem {
+                Label("Compare", systemImage: "list.bullet.below.rectangle")
+            }
+            .tag(TabDestination.comparison)
         }
         .environment(router)
     }

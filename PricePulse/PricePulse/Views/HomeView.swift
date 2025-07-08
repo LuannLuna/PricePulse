@@ -2,32 +2,46 @@ import SwiftUI
 import SwiftData
 
 struct HomeView: View {
-    @Query private var purchases: [PurchaseHistory]
+    @Query private var purchaseItems: [PurchaseItem]
     @State private var searchText = ""
     @Environment(Router.self) private var router
     
-    var groupedPurchases: [String: PurchaseHistory] {
-        let filtered = searchText.isEmpty ? purchases : purchases.filter { purchase in
-            purchase.itemDescription.localizedCaseInsensitiveContains(searchText) ||
-            purchase.productCode.localizedCaseInsensitiveContains(searchText)
-        }
-        
-        // Group by product code and get the most recent purchase for each
-        return Dictionary(grouping: filtered) { $0.productCode }
-            .mapValues { purchases in
-                purchases.sorted { $0.date > $1.date }.first!
+    // Group by product code, get most recent purchase per product
+    var groupedPurchases: [String: PurchaseItem] {
+        // Filter first
+        let filtered = searchText.isEmpty
+            ? purchaseItems
+            : purchaseItems.filter { item in
+                item.product.name.localizedCaseInsensitiveContains(searchText) ||
+                item.product.code.localizedCaseInsensitiveContains(searchText)
             }
+
+        // Group by product code, keeping only the most recent PurchaseItem for each product
+        var result: [String: PurchaseItem] = [:]
+        for item in filtered {
+            let code = item.product.code
+            if let existing = result[code] {
+                // Keep the one with the latest purchase date
+                if item.purchase.date > existing.purchase.date {
+                    result[code] = item
+                }
+            } else {
+                result[code] = item
+            }
+        }
+        return result
     }
-    
-    var sortedProducts: [(String, PurchaseHistory)] {
-        groupedPurchases.sorted { $0.value.date > $1.value.date }
+
+    var sortedProducts: [(String, PurchaseItem)] {
+        groupedPurchases.sorted { $0.value.purchase.date > $1.value.purchase.date }
     }
-    
+
     var body: some View {
         VStack {
             List {
-                ForEach(sortedProducts, id: \.0) { productCode, purchase in
-                    let productPurchases = purchases.filter { $0.productCode == productCode }.sorted { $0.date > $1.date }
+                ForEach(Array(sortedProducts.enumerated()), id: \ .offset) { idx, element in
+                    let (productCode, purchase) = element
+                    let productPurchases = purchaseItems.filter { $0.product.code == productCode }.sorted { $0.purchase.date > $1.purchase.date }
                     let previousPurchase = productPurchases.count > 1 ? productPurchases[1] : nil
                     PurchaseRow(purchase: purchase, previousPurchase: previousPurchase)
                         .contentShape(Rectangle())
@@ -54,7 +68,6 @@ struct HomeView_Previews: View {
         NavigationStack(path: $router.navigationPath) {
             HomeView()
                 .environment(router)
-                .onAppear(perform: loadCSV)
                 .modelContainer(Previews.modelContainer)
         }
     }
@@ -63,5 +76,4 @@ struct HomeView_Previews: View {
 #Preview {
     HomeView_Previews()
 }
-
 #endif

@@ -32,3 +32,9 @@ extension RawRepresentable where RawValue == String {
         rawValue.localized(arguments)
     }
 }
+
+extension TextField where Label == Text {
+    init(_ titleKey: any RawRepresentable<String>, text: Binding<String>) {
+        self.init(titleKey.localizable, text: text)
+    }
+}

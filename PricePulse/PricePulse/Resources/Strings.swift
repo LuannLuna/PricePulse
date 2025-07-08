@@ -48,4 +48,25 @@ enum Strings: String {
     case priceLabel = "price.label"
     case quantityLabel = "quantity.label"
     case dateLabel = "date.label"
+
+    // Comparison
+    case comparisonTitle = "comparison.title"
+    case comparisonProductA = "comparison.product.a"
+    case comparisonProductB = "comparison.product.b"
+    case comparisonSection = "comparison.section"
+    case comparisonName = "comparison.name"
+    case comparisonUnitsPerPackage = "comparison.units.per.package"
+    case comparisonAmountPerUnit = "comparison.amount.per.unit"
+    case comparisonAmountUnit = "comparison.amount.unit"
+    case comparisonPrice = "comparison.price"
+    case comparisonBetterValue = "comparison.better.value"
+    case comparisonSameValue = "comparison.same.value"
+    case comparisonPerBaseUnit = "comparison.per.base.unit"
+    
+    case comparisonDisplayMilliliter = "comparison.display.milliliter"
+    case comparisonDisplayLiter = "comparison.display.liter"
+    case comparisonDisplayGram = "comparison.display.gram"
+    case comparisonDisplayKilogram = "comparison.display.kilogram"
+    case comparisonDisplayMeter = "comparison.display.meter"
+    case comparisonDisplayUnit = "comparison.display.unit"
 }

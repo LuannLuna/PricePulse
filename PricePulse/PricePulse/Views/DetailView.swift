@@ -3,20 +3,19 @@ import Charts
 import SwiftData
 
 struct DetailView: View {
-    let purchase: PurchaseHistory
-    @Query private var allPurchases: [PurchaseHistory]
-    @State private var selectedPurchase: PurchaseHistory?
+    let purchase: PurchaseItem
+    @Query private var allPurchases: [PurchaseItem]
+    @State private var selectedPurchase: PurchaseItem?
     @State private var showPopup = false
     
-    var productPurchases: [PurchaseHistory] {
-        allPurchases.filter { $0.productCode == purchase.productCode }
-            .sorted { $0.date > $1.date }
+    var productPurchases: [PurchaseItem] {
+        allPurchases.filter { $0.product.code  == purchase.product.code }
     }
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text(purchase.itemDescription)
+                Text(purchase.product.name)
                     .font(.headline)
                     .lineLimit(0)
                     .minimumScaleFactor(0.5)
@@ -47,10 +46,10 @@ struct DetailView: View {
                         .font(.headline)
                     
                     Text(String(format: "price.history.popup.date".localized, 
-                              selected.date.formatted(date: .long, time: .omitted)))
+                                selected.purchase.date.formatted(date: .long, time: .omitted)))
                         .font(.subheadline)
                     
-                    Text(String(format: "price.history.popup.store".localized, selected.store))
+                    Text(String(format: "price.history.popup.store".localized, selected.purchase.supermarket.name))
                         .font(.subheadline)
                 }
                 .padding()
