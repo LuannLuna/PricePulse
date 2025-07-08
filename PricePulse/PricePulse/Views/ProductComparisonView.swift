@@ -22,25 +22,25 @@ struct ProductComparisonView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Product A")) {
+            Section(header: Text(Strings.comparisonProductA.localizable)) {
                 ProductInputView(input: $productA)
             }
-            Section(header: Text("Product B")) {
+            Section(header: Text(Strings.comparisonProductB.localizable)) {
                 ProductInputView(input: $productB)
             }
             if let valueA = productA.valuePerBaseUnit, let valueB = productB.valuePerBaseUnit {
-                Section(header: Text("Comparison")) {
+                Section(header: Text(Strings.comparisonSection.localizable)) {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(productA.displayName)
-                            Text("R$\(valueA, specifier: "%.2f") per \(productA.normalizedUnit)")
+                            Text(Strings.comparisonPerBaseUnit.localized(String(format: "%.2f", valueA), productA.normalizedUnit))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
                         VStack(alignment: .leading) {
                             Text(productB.displayName)
-                            Text("R$\(valueB, specifier: "%.2f") per \(productB.normalizedUnit)")
+                            Text(Strings.comparisonPerBaseUnit.localized(String(format: "%.2f", valueB), productB.normalizedUnit))
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
@@ -49,20 +49,20 @@ struct ProductComparisonView: View {
                     if let result = comparisonResult {
                         switch result {
                         case .aBetter:
-                            Text("\(productA.displayName) gives better value for money.")
+                            Text(Strings.comparisonBetterValue.localized(productA.displayName))
                                 .foregroundColor(.green)
                         case .bBetter:
-                            Text("\(productB.displayName) gives better value for money.")
+                            Text(Strings.comparisonBetterValue.localized(productB.displayName))
                                 .foregroundColor(.green)
                         case .equal:
-                            Text("Both products offer the same value for money.")
+                            Text(Strings.comparisonSameValue.localizable)
                                 .foregroundColor(.blue)
                         }
                     }
                 }
             }
         }
-        .navigationTitle("Compare Products")
+        .navigationTitle(Strings.comparisonTitle.localizable)
     }
 }
 
@@ -123,17 +123,17 @@ struct ProductInput {
 struct ProductInputView: View {
     @Binding var input: ProductInput
     var body: some View {
-        TextField("Name", text: $input.name)
-        TextField("Units per package", text: $input.unitsPerPackage)
+        TextField(Strings.comparisonName, text: $input.name)
+        TextField(Strings.comparisonUnitsPerPackage, text: $input.unitsPerPackage)
             .keyboardType(.decimalPad)
-        TextField("Amount per unit (e.g. 300)", text: $input.amountPerUnit)
+        TextField(Strings.comparisonAmountPerUnit, text: $input.amountPerUnit)
             .keyboardType(.decimalPad)
-        Picker("Amount unit", selection: $input.selectedUnit) {
+        Picker(Strings.comparisonAmountUnit.localizable, selection: $input.selectedUnit) {
             ForEach(Unit.allCases, id: \.self) { unit in
                 Text(unit.displayName).tag(unit)
             }
         }
-        TextField("Price (R$)", text: $input.price)
+        TextField(Strings.comparisonPrice, text: $input.price)
             .keyboardType(.decimalPad)
     }
 }

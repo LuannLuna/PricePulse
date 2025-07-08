@@ -16,12 +16,12 @@ enum Unit: String, CaseIterable {
 
     var displayName: any RawRepresentable<String> {
         switch self {
-            case .milliliter: Strings.comparisonDisplayMilliliter
-            case .liter: Strings.comparisonDisplayLiter
-            case .gram: Strings.comparisonDisplayGram
-            case .kilogram: Strings.comparisonDisplayKilogram
-            case .meter: Strings.comparisonDisplayMeter
-            case .unit: Strings.comparisonDisplayUnit
+        case .milliliter: return Strings.comparisonDisplayMilliliter
+        case .liter: return Strings.comparisonDisplayLiter
+        case .gram: return Strings.comparisonDisplayGram
+        case .kilogram: return Strings.comparisonDisplayKilogram
+        case .meter: return Strings.comparisonDisplayMeter
+        case .unit: return Strings.comparisonDisplayUnit
         }
     }
 
