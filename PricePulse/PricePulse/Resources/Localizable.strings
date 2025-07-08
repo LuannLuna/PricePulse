@@ -41,3 +41,18 @@
 "year" = "Ano";
 "store" = "Loja";
 "total" = "Total";
+
+// Comparison
+"comparison.unit.milliliter" = "ml";
+"comparison.unit.liter" = "l";
+"comparison.unit.gram" = "g";
+"comparison.unit.kilogram" = "kg";
+"comparison.unit.meter" = "m";
+"comparison.unit.unit" = "un";
+
+"comparison.display.milliliter" = "Milliliter (ml)";
+"comparison.display.liter" = "Liter (l)";
+"comparison.display.gram" = "Gram (g)";
+"comparison.display.kilogram" = "Kilogram (kg)";
+"comparison.display.meter" = "Meter (m)";
+"comparison.display.unit" = "Unit (un)";
