@@ -158,4 +158,4 @@ struct ProductComparisonView_Previews: PreviewProvider {
         }
     }
 }
-#endif
+#endif // DEBUG
